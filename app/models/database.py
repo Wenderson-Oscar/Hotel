@@ -1,6 +1,6 @@
 import sqlite3
 
-class Bank:
+class Banco:
 
   def __init__(self) -> None:
     self.connect = sqlite3.connect("sqlite3.db")
@@ -164,3 +164,7 @@ class Bank:
     """)
     self.connect.commit()
     self.cursor.close()
+
+
+if __name__ == "__main__":
+  obj = Banco()
