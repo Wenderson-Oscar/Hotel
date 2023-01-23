@@ -5,10 +5,10 @@ class Banco:
   def __init__(self) -> None:
     self.connect = sqlite3.connect("sqlite3.db")
     self.cursor = self.connect.cursor()
-    self.create_tables()
+    self.__create_tables()
 
 
-  def create_tables(self) -> str:
+  def __create_tables(self) -> str:
     self.cursor.execute("""CREATE TABLE IF NOT EXISTS hospede 
     (
       id_hospede INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
