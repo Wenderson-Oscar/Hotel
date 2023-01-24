@@ -165,6 +165,40 @@ class Banco:
     self.connect.commit()
     self.cursor.close()
 
+  # CRUD / ADM
+  def _create(self, txt: str) -> str:
+    self.cursor.execute(txt)
+    self.connect.commit()
+    self.cursor.close()
+
+  def _read(self, txt: str) -> str:
+    self.cursor.execute(txt)
+    for row in self.cursor.fetchmany():
+      return row
+
+  def _update(self, txt: str) -> str:
+    self.cursor.execute(txt)
+    self.connect.commit()
+    self.connect.close()
+
+  def _delete(self, txt: str) -> str:
+    self.cursor.execute(txt)
+    self.connect.commit()
+    self.connect.close()
+
+  # Read Function ADM/CLERK
+
+  def _list_all_guests(self) -> str:
+    pass
+
+  def _search_guest(self) -> str:
+    pass
+
+  def _search_customer_by_room_number(self) -> str:
+    pass
+
+  def _check_the_customer_total_payable(self) -> str:
+    pass
 
 if __name__ == "__main__":
   obj = Banco()
