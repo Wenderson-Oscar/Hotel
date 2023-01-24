@@ -173,7 +173,7 @@ class Banco:
 
   def _read(self, txt: str) -> str:
     self.cursor.execute(txt)
-    for row in self.cursor.fetchmany():
+    for row in self.cursor.fetchall():
       return row
 
   def _update(self, txt: str) -> str:
@@ -189,16 +189,32 @@ class Banco:
   # Read Function ADM/CLERK
 
   def _list_all_guests(self) -> str:
+    self.cursor.execute("""SELECT hospede.nome, hospede.cpf, hospede.data_criacao
+    FROM hospede INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede""")
+    for row in self.cursor.fetchall():
+      return row
+
+  def _search_guest(self, cpf: str) -> str:
     pass
 
-  def _search_guest(self) -> str:
+  def _search_customer_by_room_number(self, number: int) -> str:
     pass
 
-  def _search_customer_by_room_number(self) -> str:
+  def _check_the_customer_total_payable(self, cpf: str) -> str:
     pass
 
-  def _check_the_customer_total_payable(self) -> str:
+  def _search_for_available_rooms(self) -> str:
     pass
+
+  def search_types_of_services(self) -> str:
+    pass
+
+  def list_room_categories(self) -> str:
+    pass
+
+  def search_person_by_checkin(self, cpf: str) -> str:
+    pass
+
 
 if __name__ == "__main__":
   obj = Banco()
