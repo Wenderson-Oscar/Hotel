@@ -189,25 +189,33 @@ class Banco:
   # Read Function ADM/CLERK
 
   def _list_all_guests(self) -> str:
-    self.cursor.execute("""SELECT hospede.nome, hospede.cpf, hospede.data_criacao
-    FROM hospede INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede""")
+    self.cursor.execute("""
+    SELECT 
+    hospede.nome, hospede.cpf, hospede.data_criacao
+    FROM hospede 
+    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede""")
     for row in self.cursor.fetchall():
       return row
 
   def _search_guest(self, cpf: str) -> str:
-    self.cursor.execute(f"""SELECT hospede.nome, hospede.cpf, hospede.sexo,
-    hospede.email, hospede.telefone, hospede.data_criacao, quarto.numero_quarto
-    FROM hospede WHERE hospede.cpf = {cpf}
+    self.cursor.execute(f"""
+    SELECT 
+    hospede.nome, hospede.cpf, hospede.sexo, hospede.email, 
+    hospede.telefone, hospede.data_criacao, quarto.numero_quarto
+    FROM hospede 
+    WHERE hospede.cpf = {cpf}
     INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede AND
     INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto""")
     for row in self.cursor.fetchall():
       return row
 
   def _search_customer_by_room_number(self, number: int) -> str:
-    self.cursor.execute(f"""SELECT hospede.nome, hospede.sexo,
-    hospede.telefone, quarto.descricao, quarto.capacidade, quarto.observacao,
-    quarto.status, quarto.numero_quarto
-    FROM hospede WHERE quarto.numero_quarto = {number}
+    self.cursor.execute(f"""
+    SELECT 
+    hospede.nome, hospede.sexo, hospede.telefone, quarto.descricao, 
+    quarto.capacidade, quarto.observacao, quarto.status, quarto.numero_quarto
+    FROM hospede 
+    WHERE quarto.numero_quarto = {number}
     INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede AND
     INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto AND
     INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria""")
