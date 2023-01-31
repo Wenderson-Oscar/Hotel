@@ -204,7 +204,7 @@ class Banco:
     hospede.telefone, hospede.data_criacao, quarto.numero_quarto
     FROM hospede 
     WHERE hospede.cpf = {cpf}
-    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede AND
+    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede 
     INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto""")
     for row in self.cursor.fetchall():
       return row
@@ -213,29 +213,75 @@ class Banco:
     self.cursor.execute(f"""
     SELECT 
     hospede.nome, hospede.sexo, hospede.telefone, quarto.descricao, 
-    quarto.capacidade, quarto.observacao, quarto.status, quarto.numero_quarto
+    quarto.capacidade, quarto.observacao, quarto.status, quarto.numero_quarto,
+    categoria.descricao, categoria.valor
     FROM hospede 
     WHERE quarto.numero_quarto = {number}
-    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede AND
-    INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto AND
+    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede 
+    INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto 
     INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria""")
     for row in self.cursor.fetchall():
       return row
 
   def _check_the_customer_total_payable(self, cpf: str) -> str:
-    pass
+    self.cursor.execute(f"""
+    SELECT 
+    hospede.nome, hospede.cpf, quarto,numero_quarto, quarto.observacao, 
+    categoria.descricao, categoria.valor, reserva.entrada_prevista, reserva.saida_prevista,
+    reserva.data_criacao, checkin.data_criacao, checkout.valor_consumo,
+    checkout.valor_pago, checkout.data_criacao
+    FROM hospede
+    WHERE hospede.cpf = {cpf}
+    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede 
+    INNER JOIN quarto ON quarto.id_quarto = reserva.pk_quarto 
+    INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria 
+    INNER JOIN checkin ON reserva.id_reserva = checkin.pk_reserva_hospede 
+    INNER JOIN checkout ON reserva.id_reserva = checkout.pk_reserva_hospede
+    """)
+    for row in self.cursor.fetchall():
+      return row
 
   def _search_for_available_rooms(self) -> str:
-    pass
+    self.cursor.execute("""
+    SELECT 
+    quarto.status, quarto.numero_quarto, quarto.descricao, categoria.descricao,
+    categoria.valor 
+    FROM quarto
+    WHERE quarto.status = 'disponivel'
+    INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria""")
 
   def search_types_of_services(self) -> str:
-    pass
+    self.cursor.execute("""
+    SELECT 
+    servico.descricao, servico.preco, servico.status
+    funcionario.nome, funcionario.cargo
+    FROM servico
+    INNER JOIN funcionario ON funcionario.id_funcionario = servico.pk_funcionario""")
+    for row in self.cursor.fetchall():
+      return row
 
   def list_room_categories(self) -> str:
-    pass
+    self.cursor.execute("""
+    SELECT 
+    quarto.descricao, quarto.numero_quarto, quarto.capacidade,
+    quarto.status, categoria.descricao, categoria.valor
+    FROM quarto
+    INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria""")
+    for row in self.cursor.fetchall():
+      return row
 
-  def search_person_by_checkin(self, cpf: str) -> str:
-    pass
+  def search_person_by_checkin(self, nome: str) -> str:
+    self.cursor.execute(f"""
+    SELECT 
+    hospede.nome, reserva.entrada_prevista, reserva.saida_prevista, 
+    reserva.data_criacao, checkin.data_criacao
+    FROM hospede
+    WHERE hospede.nome = {nome}
+    INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede
+    INNER JOIN checkin ON reserva.id_reserva = checkin.pk_reserva_hospede
+    """)
+    for row in self.cursor.fetchall():
+      return row
 
 
 if __name__ == "__main__":
