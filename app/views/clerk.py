@@ -1,6 +1,5 @@
 from app.models.database import DataBase
 
-
 class AttendantQuery(DataBase):
   # Read Function 
 
@@ -110,11 +109,12 @@ class AttendantQuery(DataBase):
     matricula: str, data_admissao: str, nivel_acesso: None ,senha_acesso: None):
     pass
 
-  def _register_room(self):
+  def _register_room(self, descricao: str, numero_quarto: int, capacidade: int,
+    observacao: str, status: str):
     pass
 
-  def _register_category(self):
+  def _register_category(self, descricao: str, valor: float):
     pass
 
-  def _register_service(self):
+  def _register_service(self, descricao: str, preco: float, status: str):
     pass
