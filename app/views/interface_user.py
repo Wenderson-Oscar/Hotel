@@ -1,9 +1,20 @@
 from abc import ABC, abstractmethod
 from admin import AdminQuery
 from clerk import AttendantQuery
+from app.models.database import DataBase
+
 
 class InterfaceUser(ABC):
 
-    @abstractmethod
-    def type_user(self):
-        pass
+    def login(self, username: str, password: str) -> str:
+      if username == self.username and password == self.password:
+          return True
+      else:
+          return False
+
+    def access(self, user):
+        if user.login():
+            return DataBase().conect
+        else:
+            return "Acesso negado."
+            

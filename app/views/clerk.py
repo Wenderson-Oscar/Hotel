@@ -1,7 +1,13 @@
 from app.models.database import DataBase
+from interface_user import InterfaceUser
 
-class AttendantQuery(DataBase):
+class AttendantQuery(DataBase, InterfaceUser):
   # Read Function 
+
+  def __init__(self, username: str, passwod: str):
+    self.username = username
+    self.password = passwod
+
 
   def _list_all_guests(self) -> str:
     self.cursor.execute("""

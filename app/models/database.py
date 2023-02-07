@@ -165,5 +165,5 @@ class DataBase:
     self.connect.commit()
     self.cursor.close()
 
-if __name__ == "__main__":
-  obj = DataBase()
+""" if __name__ == "__main__":
+  obj = DataBase() """
