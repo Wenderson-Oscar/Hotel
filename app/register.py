@@ -11,6 +11,5 @@ class ReserveClient:
         self.dados_bancarios = dados_bancario
         self.senha = senha
 
-    def guest_registration(self, nome: str, cpf: str, telefone: int, email: str,
-        sexo: str, nascimento: str, dados_bancario: str, senha: str):
+    def guest_registration(self):
         pass
