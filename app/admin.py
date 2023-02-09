@@ -1,5 +1,4 @@
-from app.views.clerk import AttendantQuery
-from interface_user import InterfaceUser
+from clerk import AttendantQuery
 
 class AdminQuery(AttendantQuery):
 

@@ -1,7 +1,6 @@
-from app.models.database import DataBase
-from interface_user import InterfaceUser
+from database import DataBase
 
-class AttendantQuery(DataBase, InterfaceUser):
+class AttendantQuery(DataBase):
   # Read Function 
 
   def __init__(self, username: str, passwod: str):
@@ -104,23 +103,3 @@ class AttendantQuery(DataBase, InterfaceUser):
     for row in self.cursor.fetchall():
       return row
 
-  # INSERT Function 
-
-  def _guest_registration(self, nome: str, cpf: str, telefone: int, email: str,
-    sexo: str, nascimento: str, dados_bancario: str, senha: str):
-    pass
-
-  def _employee_registration(self, nome: str, cpf: str, email: str, telefone: str,
-    sexo: str, endereco: str, nascimento: str, dados_bancario: str, cargo: str,
-    matricula: str, data_admissao: str, nivel_acesso: None ,senha_acesso: None):
-    pass
-
-  def _register_room(self, descricao: str, numero_quarto: int, capacidade: int,
-    observacao: str, status: str):
-    pass
-
-  def _register_category(self, descricao: str, valor: float):
-    pass
-
-  def _register_service(self, descricao: str, preco: float, status: str):
-    pass
