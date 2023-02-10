@@ -6,30 +6,21 @@ import os
 
 class OpenJson:
 
-    def __init__(self, file_authenticade: str):
+    def __init__(self, file_authenticade: dict):
         self.file_authenticade = file_authenticade
         self.url = os.path.join(os.getcwd(), self.file_authenticade)
-
 
 
     def open_json(self):
         with open(self.url, 'r') as self.file:
             self.dice = json.load(self.file)
-            print(self.dice)
+            return self.dice
 
 
-class Authenticade:
+class LoginAbstrat():
 
-    def senha(self):
-        self.senhas = {'admin': {'username': 'admin', 'password': 'admin'},
-        'clerk': {'username': 'clerk', 'password': '123'}}
-
-
-class Login(ABC):
-
-
-    @abstractmethod
-    def login(self, username: str, password: str):
+    
+    def login(self, username: str, password: str) -> bool:
         if username == self.username and password == self.password:
             return True
         else:
@@ -42,12 +33,17 @@ class Model:
         self.data = DataBase()
 
     
-    def access(self, user: Type[Login]):
-        if user.login():
+    def access(self,username: str, password: str, user: LoginAbstrat):
+        if user.login(username, password):
             return self.data.connect
         else:
             return 'Acesso Negado'
 
-
-obj = OpenJson("authenticade.json")
-obj.open_json()
+acs = OpenJson("authenticade.json")
+model = Model()
+authentication_file = {'username': 'admin', 'password': 'admin'}
+result = model.access('admin', 'admin', acs)
+if result == 'Acesso Negado':
+    print(result)
+else:
+    print('Conexão com banco de dados realizada com sucesso!')
