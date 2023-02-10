@@ -4,6 +4,7 @@ from typing import Type
 import json
 import os
 
+
 class OpenJson:
 
     def __init__(self, file_authenticade: dict):
@@ -11,20 +12,10 @@ class OpenJson:
         self.url = os.path.join(os.getcwd(), self.file_authenticade)
 
 
-    def open_json(self):
+    def open_file(self):
         with open(self.url, 'r') as self.file:
             self.dice = json.load(self.file)
             return self.dice
-
-
-class LoginAbstrat():
-
-    
-    def login(self, username: str, password: str) -> bool:
-        if username == self.username and password == self.password:
-            return True
-        else:
-            return False
 
 
 class Model:
@@ -33,17 +24,15 @@ class Model:
         self.data = DataBase()
 
     
-    def access(self,username: str, password: str, user: LoginAbstrat):
-        if user.login(username, password):
-            return self.data.connect
-        else:
-            return 'Acesso Negado'
+    def login(self, username: str, password: str, file_authenticade: OpenJson) -> bool:
+        self.authenticade = file_authenticade.open_file()
+        for row in self.authenticade.values():
+            if username == row.get('username')  and password == row.get('password'):
+                return self.data.connect
+            else:
+                return "Acesso Negado!"
 
-acs = OpenJson("authenticade.json")
-model = Model()
-authentication_file = {'username': 'admin', 'password': 'admin'}
-result = model.access('admin', 'admin', acs)
-if result == 'Acesso Negado':
-    print(result)
-else:
-    print('Conexão com banco de dados realizada com sucesso!')
+a = OpenJson("authenticade.json")
+d = Model()
+c = d.login('admin','admin',a)
+print(c)
