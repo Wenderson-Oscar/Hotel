@@ -1,6 +1,7 @@
 from register import ReserveClient
+from model import Model
 
-class Employee(ReserveClient):
+class Employee(ReserveClient, Model):
 
     def __init__(self, nome: str, cpf: str, telefone: int, email: str, sexo: str, nascimento: str, dados_bancario: str,
         cargo: str, matricula: str, data_admissao: str, nivel_acesso: None, senha: None) -> str:
