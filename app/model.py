@@ -51,7 +51,7 @@ class Model:
 
     def login(self, username: str, password: str) -> bool:
         if self.authentication.authenticate(username, password):
-            return self.database.connect()
+            return self.database.connect
         else:
             return False
 

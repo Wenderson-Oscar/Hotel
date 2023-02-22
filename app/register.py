@@ -18,11 +18,14 @@ class ReserveClient:
 
 
     def guest_registration(self):
-        self.database.connect.execute("""INSERT INTO hospede (nome, cpf, telefone, email, sexo, data_nascimento, 
-        dados_bancarios, senha_bancaria, data_criacao) VALUES (?,?,?,?,?,?,?,?,?)""", (self.nome, self.cpf, self.telefone, self.email,
-        self.sexo, self.nascimento, self.dados_bancarios, self.senha, datetime.today()))
-        self.database.connect.commit()
-        self.database.connect.close()
+        conn = self.model.database.connect()
+        cursor = conn.cursor()
+        cursor.execute("""
+        INSERT INTO hospede (nome, cpf, telefone, email, sexo, data_nascimento, dados_bancarios, senha_bancaria,
+        data_criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",(self.nome, self.cpf, self.telefone, 
+        self.email, self.sexo, self.nascimento, self.dados_bancarios, self.senha, datetime.today()))
+        conn.commit()
+        conn.close()
         return 'reservado com sucesso'
 
 if __name__ == "__main__":
@@ -30,3 +33,4 @@ if __name__ == "__main__":
     c = Databases()
     cliente = ReserveClient('Maria','22332122322','88100200','maria@gmail.com','F','2003-06-27','3','222',Model(a,c))
     a = cliente.guest_registration()
+    print(a)
