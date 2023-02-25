@@ -1,6 +1,6 @@
 from model import FileAuthentication, Model, Databases
 
-class Category:
+class RoomCategory:
 
     def __init__(self, descricao: str, valor: float, model: Model):
         self.descricao = descricao
@@ -20,7 +20,7 @@ class Category:
 if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
-    obj = Category('Simples', 300, Model(file, db))
+    obj = RoomCategory('Simples', 300, Model(file, db))
     a = obj.register_category()
     print(a)
     

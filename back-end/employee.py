@@ -1,4 +1,3 @@
-from register import ReserveClient
 from model import Model
 from datetime import datetime
 from model import FileAuthentication, Databases
@@ -23,6 +22,7 @@ class Employee:
 
 
     def employee_registration(self):
+        """inserir funcionario no banco"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO funcionario (nome, cpf, telefone, email, sexo, data_nascimento, dados_bancario,

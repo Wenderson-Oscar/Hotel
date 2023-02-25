@@ -2,6 +2,7 @@ from model import Model
 from datetime import datetime
 from model import FileAuthentication, Databases
 
+
 class ReserveClient:
 
     def __init__(self, nome: str, cpf: str, telefone: int, email: str,
@@ -18,12 +19,14 @@ class ReserveClient:
 
 
     def guest_registration(self):
+        """inserir hospede no banco"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""
         INSERT INTO hospede (nome, cpf, telefone, email, sexo, data_nascimento, dados_bancarios, senha_bancaria,
-        data_criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",(self.nome, self.cpf, self.telefone, 
-        self.email, self.sexo, self.nascimento, self.dados_bancarios, self.senha, datetime.today()))
+        data_criacao) VALUES (?,?,?,?,?,?,?,?,?)""",
+        (self.nome, self.cpf, self.telefone, self.email, self.sexo, self.nascimento, self.dados_bancarios, 
+        self.senha, datetime.today()))
         conn.commit()
         conn.close()
         return 'reservado com sucesso'

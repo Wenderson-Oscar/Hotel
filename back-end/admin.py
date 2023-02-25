@@ -5,6 +5,7 @@ class AdminQuery(Employee):
 
   # CRUD / ADM
   def __create(self, txt: str) -> str:
+    """criação"""
     conn = self.model.database.connect()
     cursor = conn.cursor()
     cursor.execute(txt)
@@ -15,6 +16,7 @@ class AdminQuery(Employee):
     return self.__create(txt)
 
   def __read(self, txt: str) -> str:
+    """leitura"""
     conn = self.model.database.connect()
     cursor = conn.cursor()
     cursor.execute(txt)
@@ -25,6 +27,7 @@ class AdminQuery(Employee):
     return self.__read(txt)
 
   def __update(self, txt: str) -> str:
+    """atualização"""
     conn = self.model.database.connect()
     cursor = conn.cursor()
     cursor.execute(txt)
@@ -35,6 +38,7 @@ class AdminQuery(Employee):
     return self.__update(txt)
 
   def __delete(self, txt: str) -> str:
+    """deletação"""
     conn = self.model.database.connect()
     cursor = conn.cursor()
     cursor.execute(txt)

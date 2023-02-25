@@ -24,6 +24,7 @@ class FileAuthentication(AuthenticationInterface):
         self.file_path = file_path
 
     def authenticate(self, username: str, password: str) -> bool:
+        """ler arquivo de autenticação e comparar"""
         with open(self.file_path) as f:
             authenticade = json.load(f)
         for row in authenticade.values():
@@ -39,7 +40,7 @@ class Databases(DatabaseInterface):
 
 
     def connect(self):
-        # Implementação da conexão com o banco de dados
+        """Implementação da conexão com o banco de dados"""
         return self.con.connect
 
 
@@ -50,14 +51,16 @@ class Model:
         self.database = database
 
     def login(self, username: str, password: str) -> bool:
+        """login de identificação de funcionario"""
         if self.authentication.authenticate(username, password):
             return self.database.connect
         else:
             return False
 
 
-""" file = FileAuthentication("authenticade.json")
-a = Databases()
-db = Model(file, a)
-c = db.login('admin','admin')
-print(c) """
+if __name__ == "__main__":
+    file = FileAuthentication("authenticade.json")
+    a = Databases()
+    db = Model(file, a)
+    c = db.login('admin','admin')
+    print(c)
