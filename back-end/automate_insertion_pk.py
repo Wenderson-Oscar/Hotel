@@ -50,6 +50,15 @@ class AutoIncrementPk:
         result = cursor.fetchone()[0]
         #conn.close()
         return result
+    
+    def count_reserve(self):
+        """contar a quantidade de reservas"""
+        conn = self.model.database.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM reserva")
+        result = cursor.fetchone()[0]
+        #conn.close()
+        return result
 
 
 if __name__ == "__main__":
@@ -61,4 +70,5 @@ if __name__ == "__main__":
         c = obj.count_category()
         d = obj.count_service()
         e = obj.count_room()
-        print(a, b, c, d, e)
+        f = obj.count_reserve()
+        print(a, b, c, d, e, f)
