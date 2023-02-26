@@ -9,6 +9,7 @@ class DataBase:
 
 
   def __create_tables(self) -> str:
+    """criação do banco de dados"""
     self.cursor.execute("""CREATE TABLE IF NOT EXISTS hospede 
     (
       id_hospede INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -96,7 +97,7 @@ class DataBase:
       id_reserva INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       quant_hospedes INTEGER,
       antecipacao FLOAT,
-      entrava_prevista DATETIME,
+      entrada_prevista DATETIME,
       saida_prevista DATETIME,
       data_criacao DATETIME,
       pk_hospede INTEGER NOT NULL,
