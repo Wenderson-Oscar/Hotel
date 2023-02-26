@@ -26,15 +26,28 @@ class Checkout:
         conn.close()
         return 'Dados Inseridos'
     
-    def calculate_total(self):
-        pass
-    
+    def calculate_value_total(self, automate_pk: AutoIncrementPk):
+        count_reserva_pk = automate_pk.count_reserve()
+        conn = self.model.database.connect()
+        cursor = conn.cursor()
+        cursor.execute("""SELECT r.quant_hospedes * c.valor + coalesce(ch.valor_consumo, 0) AS preco_total
+        FROM reserva r
+        INNER JOIN quarto q ON q.id_quarto = r.pk_quarto
+        INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
+        LEFT JOIN checkout ch ON ch.pk_reserva = r.id_reserva
+        WHERE r.id_reserva = ? """, (str(count_reserva_pk)))
+        result = cursor.fetchone()[0]
+        conn.close()
+        return result if result else None
+
 
 if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = Checkout(300, 320, model)
+    obj = Checkout(100, 100, model)
     a = obj.register_checkout(count_pk)
     print(a)
+    b = obj.calculate_value_total(count_pk)
+    print(b)
