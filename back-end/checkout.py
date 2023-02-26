@@ -1,6 +1,6 @@
 from model import Model, FileAuthentication, Databases
 from automate_insertion_pk import AutoIncrementPk
-from datetime import datetime
+from datetime import datetime, date
 
 class Checkout:
 
@@ -37,17 +37,17 @@ class Checkout:
             r.quant_hospedes * c.valor + COALESCE(serv.preco, 0) AS preco_total,
             strftime('%s', r.saida_prevista) - strftime('%s', r.entrada_prevista) AS num_dias,
             CASE 
-                WHEN r.saida_prevista > r.saida_prevista 
-                THEN (strftime('%s', r.saida_prevista)
-            - strftime('%s', r.entrada_prevista)) / 86400 * (c.valor * 0.1)
+                WHEN ? > strftime('%s', r.saida_prevista, 'localtime')
+                THEN (strftime('%s', r.saida_prevista, 'localtime')
+            - strftime('%s', r.entrada_prevista, 'localtime')) / 86400 * (c.valor * 0.1)
             ELSE 0 
             END AS multa
         FROM reserva r
         INNER JOIN quarto q ON q.id_quarto = r.pk_quarto
         INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
-        LEFT JOIN reservar_servico rs ON rs.pk_categoria = c.id_categoria
+        LEFT JOIN reservar_servico rs ON c.id_categoria = rs.pk_categoria
         LEFT JOIN servico serv ON serv.id_servico = rs.pk_servico
-        WHERE r.pk_hospede = ? """, (str(count_reserva_pk)))
+        WHERE r.pk_hospede = ? """, (date.today(), str(count_reserva_pk)))
         result = cursor.fetchone()
         conn.close()
         if result is not None:
