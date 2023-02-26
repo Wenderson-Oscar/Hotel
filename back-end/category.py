@@ -9,6 +9,7 @@ class RoomCategory:
 
 
     def register_category(self):
+        """inserir dados do checkin"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO categoria (descricao, valor) VALUES (?,?)""", (self.descricao, self.valor))

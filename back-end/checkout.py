@@ -11,6 +11,7 @@ class Checkout:
 
 
     def register_checkout(self, automate_pk: AutoIncrementPk):
+        """Insere os dados no checkout"""
         count_employee_pk = automate_pk.count_employee()
         count_reserve_pk = automate_pk.count_reserve()
         count_client_pk = automate_pk.count_client()
@@ -27,6 +28,7 @@ class Checkout:
         return 'Dados Inseridos'
     
     def calculate_value_total(self, automate_pk: AutoIncrementPk):
+        """faz o calculo de pagamento total considenrado diaria, multa, serviço"""
         count_reserva_pk = automate_pk.count_reserve()
         conn = self.model.database.connect()
         cursor = conn.cursor()
