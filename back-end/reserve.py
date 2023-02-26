@@ -33,6 +33,6 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = ReserveClient(1,'2023-02-30', '2023-03-06', model)
+    obj = ReserveClient(2,'2023-02-30', '2023-03-02', model)
     a = obj.register_reserve(count_pk)
     print(a)

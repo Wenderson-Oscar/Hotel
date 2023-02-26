@@ -22,14 +22,21 @@ class Service:
         conn.close()
         return 'Dados Inseridos'
     
-    def enter_relationship_data(self, automate_pk: AutoIncrementPk):
-        """inserir relacionamento de serviço no banco"""
-        count_service_pk = automate_pk.count_service()
-        count_category_pk = automate_pk.count_category()
+
+class BookRoomService:
+
+    def __init__(self, number_room: int, type_service: int, model: Model):
+        self.number_room = number_room
+        self.type_service = type_service
+        self.model = model
+
+
+    def book_order(self):
+        """serviço de quarto"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO reservar_servico (data_criacao, pk_servico, pk_categoria) VALUES 
-        (?,?,?)""", (date.today(), count_service_pk, count_category_pk))
+        (?,?,?)""", (date.today(), self.type_service, self.number_room))
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
@@ -42,7 +49,7 @@ if __name__ == "__main__":
     automate_pk = AutoIncrementPk(model)
     obj = Service('Cafe da manhã', 10, 'Ativo', model)
     a = obj.register_service(automate_pk)
-    b = obj.enter_relationship_data(automate_pk)
     print(a)
-    print()
-    print(b)
+    #obj2 = BookRoomService(1,1,model)
+    #c = obj2.book_order()
+    #print(c)

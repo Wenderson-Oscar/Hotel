@@ -50,7 +50,10 @@ class Checkout:
         WHERE r.pk_hospede = ? """, (str(count_reserva_pk)))
         result = cursor.fetchone()
         conn.close()
-        return result if result else 'Não a dados para calcular!'
+        if result is not None:
+            return result[0]
+        else:
+            return 'Não a dados para calcular!'
 
 
 if __name__ == "__main__":

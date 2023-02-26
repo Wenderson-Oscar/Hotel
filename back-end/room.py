@@ -31,6 +31,6 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = Room('Quarto Simples', 1, 2, 'Quarto Simples para duas pessoas', 'Reservado', model)
+    obj = Room('Quarto Luxo', 1, 2, 'Quarto luxo para duas pessoas', 'Reservado', model)
     a = obj.register_room(count_pk)
     print(a)

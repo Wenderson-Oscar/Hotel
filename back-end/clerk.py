@@ -15,7 +15,7 @@ class AttendantQuery:
     self.cursor = self.conn.cursor()
     self.cursor.execute("""
     SELECT 
-    hospede.nome, hospede.cpf, hospede.data_criacao
+    hospede.id_hospede, hospede.nome, hospede.cpf, hospede.data_criacao
     FROM hospede 
     INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede""")
     rows = self.cursor.fetchall()
