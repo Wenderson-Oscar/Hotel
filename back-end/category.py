@@ -20,7 +20,7 @@ class RoomCategory:
 if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
-    obj = RoomCategory('Simples', 300, Model(file, db))
+    obj = RoomCategory('Luxo', 800, Model(file, db))
     a = obj.register_category()
     print(a)
     

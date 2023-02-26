@@ -30,12 +30,22 @@ class Checkout:
         count_reserva_pk = automate_pk.count_reserve()
         conn = self.model.database.connect()
         cursor = conn.cursor()
-        cursor.execute("""SELECT r.quant_hospedes * c.valor + coalesce(ch.valor_consumo, 0) AS preco_total
+        cursor.execute("""
+        SELECT 
+            r.quant_hospedes * c.valor + COALESCE(serv.preco, 0) AS preco_total,
+            strftime('%s', r.saida_prevista) - strftime('%s', r.entrada_prevista) AS num_dias,
+            CASE 
+                WHEN r.saida_prevista > r.saida_prevista 
+                THEN (strftime('%s', r.saida_prevista)
+            - strftime('%s', r.entrada_prevista)) / 86400 * (c.valor * 0.1)
+            ELSE 0 
+            END AS multa
         FROM reserva r
         INNER JOIN quarto q ON q.id_quarto = r.pk_quarto
         INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
-        LEFT JOIN checkout ch ON ch.pk_reserva = r.id_reserva
-        WHERE r.id_reserva = ? """, (str(count_reserva_pk)))
+        LEFT JOIN reservar_servico rs ON rs.pk_categoria = c.id_categoria
+        LEFT JOIN servico serv ON serv.id_servico = rs.pk_servico
+        WHERE r.pk_hospede = ? """, (str(count_reserva_pk)))
         result = cursor.fetchone()[0]
         conn.close()
         return result if result else None
@@ -46,8 +56,8 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = Checkout(100, 100, model)
-    a = obj.register_checkout(count_pk)
-    print(a)
+    obj = Checkout(800, 800, model)
+    #a = obj.register_checkout(count_pk)
+    #print(a)
     b = obj.calculate_value_total(count_pk)
     print(b)
