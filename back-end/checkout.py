@@ -26,6 +26,13 @@ class Checkout:
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
+
+
+class CalculateValueClient:
+
+    def __init__(self, model: Model):
+        self.model = model
+
     
     def calculate_value_total(self, automate_pk: AutoIncrementPk):
         """faz o calculo de pagamento total considerando diaria, multa, serviço"""
@@ -61,8 +68,9 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = Checkout(800, 800, model)
-    #a = obj.register_checkout(count_pk)
-    #print(a)
-    b = obj.calculate_value_total(count_pk)
-    print(b)
+    obj1 = CalculateValueClient(model)
+    #b = obj1.calculate_value_total(count_pk)
+    #print(b)
+    obj = Checkout(1610, 1610, model)
+    a = obj.register_checkout(count_pk)
+    print(a)
