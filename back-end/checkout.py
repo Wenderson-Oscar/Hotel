@@ -4,7 +4,11 @@ from datetime import datetime, date
 
 class Checkout:
 
-    def __init__(self, valor_consumo: float, valor_pago: float, model: Model) -> None:
+    def __init__(self, number_employee: int, number_room: int, type_category: int,
+                  valor_consumo: float, valor_pago: float, model: Model) -> None:
+        self.number_employee = number_employee
+        self.number_room = number_room
+        self.type_category = type_category
         self.valor_consumo = valor_consumo
         self.valor_pago = valor_pago
         self.model = model
@@ -12,17 +16,14 @@ class Checkout:
 
     def register_checkout(self, automate_pk: AutoIncrementPk):
         """Insere os dados no checkout"""
-        count_employee_pk = automate_pk.count_employee()
         count_reserve_pk = automate_pk.count_reserve()
         count_client_pk = automate_pk.count_client()
-        count_room_pk = automate_pk.count_room()
-        count_category_pk = automate_pk.count_category()
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO checkout (valor_consumo, valor_pago, data_criacao, pk_funcionario,
         pk_reserva, pk_reserva_hospede, pk_reserva_quarto, pk_reserva_categoria) VALUES (?,?,?,?,?,?,?,?)""",
-        (self.valor_consumo, self.valor_pago, datetime.today(), count_employee_pk, count_reserve_pk, 
-        count_client_pk, count_room_pk, count_category_pk))
+        (self.valor_consumo, self.valor_pago, datetime.today(), self.number_employee, count_reserve_pk, 
+        count_client_pk, self.number_room, self.type_category))
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
@@ -71,6 +72,6 @@ if __name__ == "__main__":
     obj1 = CalculateValueClient(model)
     #b = obj1.calculate_value_total(count_pk)
     #print(b)
-    obj = Checkout(1610, 1610, model)
+    obj = Checkout(1,1,1,1610, 1610, model)
     a = obj.register_checkout(count_pk)
     print(a)

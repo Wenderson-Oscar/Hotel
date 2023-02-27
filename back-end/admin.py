@@ -1,7 +1,7 @@
-from employee import Employee
+from clerk import AttendantQuery
 from model import FileAuthentication, Databases, Model
 
-class AdminQuery(Employee):
+class AdminQuery(AttendantQuery):
 
   # CRUD / ADM
   def __create(self, txt: str) -> str:
