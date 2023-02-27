@@ -30,6 +30,6 @@ if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
     model = Model(file, db)
-    obj = Room('Quarto Luxo', 1, 2, 'Quarto luxo para duas pessoas', 'Reservado', model)
+    obj = Room(1,'Quarto Luxo', 1, 2, 'Quarto luxo para duas pessoas com geladeira com alimentos gratuitos', 'Reservado', model)
     a = obj.register_room()
     print(a)

@@ -1,23 +1,23 @@
 from model import Model, FileAuthentication, Databases
-from automate_insertion_pk import AutoIncrementPk
 from datetime import date
 
 class Service:
 
-    def __init__(self, descricao: str, preco: float, status: str, model: Model):
+    def __init__(self, descricao: str, preco: float, status: str, responsible_official: int, model: Model):
         self.descricao = descricao
         self.preco = preco
         self.status = status
+        self.responsible_official = responsible_official
+
         self.model = model
 
 
-    def register_service(self, automate_pk: AutoIncrementPk):
+    def register_service(self):
         """inserir serviço no banco"""
-        count_pk = automate_pk.count_employee()
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO servico (descricao, preco, status, pk_funcionario) VALUES (?,?,?,?)""", 
-        (self.descricao, self.preco, self.status, count_pk))
+        (self.descricao, self.preco, self.status, self.responsible_official))
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
@@ -46,10 +46,9 @@ if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
     model = Model(file, db)
-    automate_pk = AutoIncrementPk(model)
-    obj = Service('Cafe da manhã', 10, 'Ativo', model)
-    a = obj.register_service(automate_pk)
-    print(a)
-    #obj2 = BookRoomService(1,1,model)
-    #c = obj2.book_order()
-    #print(c)
+    #obj = Service('Cafe da manhã', 10, 'Ativo', 1,model)
+    #a = obj.register_service()
+    #print(a)
+    obj2 = BookRoomService(1,1,model)
+    c = obj2.book_order()
+    print(c)
