@@ -1,6 +1,6 @@
 from database import DataBase
 import json
-import os
+
 
 from abc import ABC, abstractmethod
 
@@ -19,6 +19,8 @@ class DatabaseInterface(ABC):
 
     
 class FileAuthentication(AuthenticationInterface):
+
+    """Classe responsavel por ler o arquivo de autenticação / autorizar o acesso"""
     
     def __init__(self, file_path: str):
         self.file_path = file_path
@@ -44,7 +46,10 @@ class Databases(DatabaseInterface):
         return self.con.connect
 
 
+# essa classe gerencia o acesso 
 class Model:
+
+    """Classe responsável por gerenciar o acesso dos usuários no banco"""
 
     def __init__(self, authentication: AuthenticationInterface, database: DatabaseInterface):
         self.authentication = authentication
