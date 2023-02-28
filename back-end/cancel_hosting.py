@@ -1,5 +1,6 @@
 from model import Model, FileAuthentication, Databases
 
+
 class CancelHosting:
 
     def __init__(self, nome: str, cpf: str, model: Model) -> None:

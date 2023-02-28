@@ -1,6 +1,7 @@
 from model import Model, Databases, FileAuthentication
 from typing import Tuple, List
 
+
 class AttendantQuery:
   # Read Function 
 

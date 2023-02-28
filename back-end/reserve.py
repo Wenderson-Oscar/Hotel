@@ -2,6 +2,7 @@ from model import Model, FileAuthentication, Databases
 from datetime import datetime
 from automate_insertion_pk import AutoIncrementPk
 
+
 class ReserveClient:
 
     def __init__(self, type_category: int, number_room: int, quant_hospedes: int, entrada_prevista: str,

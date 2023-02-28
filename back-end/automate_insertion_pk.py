@@ -1,5 +1,6 @@
 from model import Model, FileAuthentication, Databases
 
+
 class AutoIncrementPk:
 
     def __init__(self, model: Model):

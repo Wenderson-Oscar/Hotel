@@ -2,6 +2,7 @@ from model import Model, FileAuthentication, Databases
 from automate_insertion_pk import AutoIncrementPk
 from datetime import datetime
 
+
 class Checkin:
 
     def __init__(self, number_employee: int, number_room: int, type_category: int, model: Model) -> None:

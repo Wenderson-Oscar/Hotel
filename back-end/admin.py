@@ -1,6 +1,7 @@
 from clerk import AttendantQuery
 from model import FileAuthentication, Databases, Model
 
+
 class AdminQuery(AttendantQuery):
 
   # CRUD / ADM

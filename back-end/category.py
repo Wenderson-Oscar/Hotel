@@ -1,5 +1,6 @@
 from model import FileAuthentication, Model, Databases
 
+
 class RoomCategory:
 
     def __init__(self, descricao: str, valor: float, model: Model):

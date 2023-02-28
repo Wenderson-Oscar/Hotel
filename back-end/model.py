@@ -1,8 +1,7 @@
 from database import DataBase
 import json
-
-
 from abc import ABC, abstractmethod
+
 
 class AuthenticationInterface(ABC):
     
