@@ -9,6 +9,7 @@ class CancelHosting:
 
 
     def cancel_client(self):
+        """Cancelar hospede e tudo relacionado"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
         sql = """DELETE FROM hospede WHERE hospede.nome = :nome_param AND hospede.cpf = :cpf_param"""
