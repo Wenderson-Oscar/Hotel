@@ -26,7 +26,8 @@ class Employee:
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO funcionario (nome, cpf, telefone, email, sexo, data_nascimento, dados_bancario,
-        cargo, matricula, data_adimissao, nivel_acesso, senha_acesso) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""", (self.nome,
+        cargo, matricula, data_adimissao, nivel_acesso, senha_acesso) VALUES (:nome,:cpf,:telefone,:email,:sexo,
+        :data_nascimento,:dados_bancario,:cargo,:matricula,:data_admissao,:nivel_acesso,:senha_acesso)""", (self.nome,
         self.cpf, self.telefone, self.email, self.sexo, self.nascimento, self.dados_bancarios, self.cargo,
         self.matricula, datetime.today(), self.nivel_acesso, self.senha))
         conn.commit()
@@ -37,7 +38,7 @@ class Employee:
 if __name__ == "__main__":
     a = FileAuthentication("authenticade.json")
     c = Databases()
-    cliente = Employee('Maria','22332122342','88800210','mariaclara@gmail.com','F','2001-08-23','4','Cozinheira',
-    '1', Model(a,c))
+    cliente = Employee('Julia','33332122342','88810210','juliana@gmail.com','F','2003-01-20','5','Recpcionista',
+    '2', Model(a,c),'1','123')
     a = cliente.employee_registration()
     print(a)

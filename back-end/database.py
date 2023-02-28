@@ -53,7 +53,7 @@ class DataBase:
     self.cursor.execute(""" CREATE TABLE IF NOT EXISTS servico
     (
       id_servico INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      descricao VARHCAR(100),
+      descricao VARCHCAR(100),
       preco FLOAT,
       status VARCHAR(45),
       pk_funcionario INTEGER NOT NULL,
@@ -124,7 +124,7 @@ class DataBase:
       pk_reserva_hospede INTEGER NOT NULL,
       pk_reserva_quarto INTEGER NOT NULL,
       pk_reserva_categoria INTEGER NOT NULL,
-      CONSTRAINT pk_funcionario_id_funcionario_in
+      CONSTRAINT pk_funcionario_id_funcionario
       FOREIGN KEY(pk_funcionario)
       REFERENCES funcionario (id_funcionario)
       CONSTRAINT pk_reserva_reservahospede_reservaquarto_reservacategoria_in

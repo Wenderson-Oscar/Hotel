@@ -24,7 +24,8 @@ class ReserveClient:
         cursor = conn.cursor()
         cursor.execute("""
         INSERT INTO hospede (nome, cpf, telefone, email, sexo, data_nascimento, dados_bancarios, senha_bancaria,
-        data_criacao) VALUES (?,?,?,?,?,?,?,?,?)""",
+        data_criacao) VALUES (:nome,:cpf,:telfone,:email,:sexo,:data_nascimento,:dados_bancarios,
+        :senha_bancaria,:data_criacao)""",
         (self.nome, self.cpf, self.telefone, self.email, self.sexo, self.nascimento, self.dados_bancarios, 
         self.senha, datetime.today()))
         conn.commit()
@@ -34,6 +35,6 @@ class ReserveClient:
 if __name__ == "__main__":
     a = FileAuthentication("authenticade.json")
     c = Databases()
-    cliente = ReserveClient('Maria','22332122322','88100200','maria@gmail.com','F','2003-06-27','3','222',Model(a,c))
+    cliente = ReserveClient('Joana Silva','99332126322','88109280','joana@gmail.com','F','2000-05-17','9','228',Model(a,c))
     a = cliente.guest_registration()
     print(a)

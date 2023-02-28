@@ -1,6 +1,6 @@
 from database import DataBase
 import json
-import os
+
 
 from abc import ABC, abstractmethod
 
@@ -19,12 +19,14 @@ class DatabaseInterface(ABC):
 
     
 class FileAuthentication(AuthenticationInterface):
+
+    """Classe responsavel por ler o arquivo de autenticação / autorizar o acesso"""
     
     def __init__(self, file_path: str):
         self.file_path = file_path
 
-    def authenticate(self, username: str, password: str) -> bool:
-        """ler arquivo de autenticação e comparar"""
+    def authenticate(self, username: str = None, password: str = None) -> bool:
+        """ler arquivo de autenticação e comparar o valores"""
         with open(self.file_path) as f:
             authenticade = json.load(f)
         for row in authenticade.values():
@@ -44,7 +46,10 @@ class Databases(DatabaseInterface):
         return self.con.connect
 
 
+# essa classe gerencia o acesso 
 class Model:
+
+    """Classe responsável por gerenciar o acesso dos usuários no banco"""
 
     def __init__(self, authentication: AuthenticationInterface, database: DatabaseInterface):
         self.authentication = authentication
@@ -55,12 +60,13 @@ class Model:
         if self.authentication.authenticate(username, password):
             return self.database.connect
         else:
-            return False
+            return 'Acesso Negado'
 
 
 if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
+    a = file.authenticate()
     a = Databases()
     db = Model(file, a)
-    c = db.login('admin','admin')
+    c = db.login('clerk','123')
     print(c)
