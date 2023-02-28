@@ -12,6 +12,7 @@ class Checkin:
 
 
     def register_checkin(self, automate_pk: AutoIncrementPk):
+        """Inserir checkin no banco"""
         count_reserve_pk = automate_pk.count_reserve()
         count_client_pk = automate_pk.count_client()
         conn = self.model.database.connect()
