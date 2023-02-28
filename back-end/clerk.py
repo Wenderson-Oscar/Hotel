@@ -89,8 +89,11 @@ class AttendantQuery:
     FROM quarto
     INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria
     WHERE quarto.status = 'disponivel'""")
-    for row in cursor.fetchall():
-      return row
+    rows = cursor.fetchall()
+    result = []
+    for row in rows:
+      result.append(row)
+    return result
 
   def _search_types_of_services(self) -> str:
     """Procura os serviços que existe """
@@ -102,8 +105,11 @@ class AttendantQuery:
     funcionario.nome, funcionario.cargo
     FROM servico
     INNER JOIN funcionario ON funcionario.id_funcionario = servico.pk_funcionario""")
-    for row in cursor.fetchall():
-      return row
+    rows = cursor.fetchall()
+    result = []
+    for row in rows:
+      result.append(row)
+    return result
 
   def _list_room_categories(self) -> str:
     """lista todos as categorias de quartos"""
@@ -115,8 +121,11 @@ class AttendantQuery:
     quarto.status, categoria.descricao, categoria.valor
     FROM quarto
     INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria""")
-    for row in cursor.fetchall():
-      return row
+    rows = cursor.fetchall()
+    result = []
+    for row in rows:
+      result.append(row)
+    return result
 
   def _search_person_by_checkin(self, nome: str) -> str:
     """Procura o hospede que tenha feito o checkin"""
@@ -139,6 +148,6 @@ if __name__ == "__main__":
   db = Databases()
   model = Model(file, db)
   obj = AttendantQuery('clerk', '123', model)
-  a = obj. _search_person_by_checkin('Maria')
+  a = obj._list_room_categories()
   print(a)
   

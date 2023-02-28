@@ -21,7 +21,9 @@ class Checkout:
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO checkout (valor_consumo, valor_pago, data_criacao, pk_funcionario,
-        pk_reserva, pk_reserva_hospede, pk_reserva_quarto, pk_reserva_categoria) VALUES (?,?,?,?,?,?,?,?)""",
+        pk_reserva, pk_reserva_hospede, pk_reserva_quarto, pk_reserva_categoria) VALUES (:valor_consumo,
+        :valor_pago,:data_criacao,:pk_funcionario,:pk_reserva,:pk_reserva_hospede,:pk_reserva_quarto,
+        :pk_reserva_categoria)""",
         (self.valor_consumo, self.valor_pago, datetime.today(), self.number_employee, count_reserve_pk, 
         count_client_pk, self.number_room, self.type_category))
         conn.commit()
@@ -55,7 +57,7 @@ class CalculateValueClient:
         INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
         LEFT JOIN reservar_servico rs ON c.id_categoria = rs.pk_categoria
         LEFT JOIN servico serv ON serv.id_servico = rs.pk_servico
-        WHERE r.pk_hospede = ? """, (date.today(), str(count_reserva_pk)))
+        WHERE r.pk_hospede = :id_param """, (date.today(), str(count_reserva_pk)))
         result = cursor.fetchone()
         conn.close()
         if result is not None:
@@ -72,6 +74,6 @@ if __name__ == "__main__":
     obj1 = CalculateValueClient(model)
     #b = obj1.calculate_value_total(count_pk)
     #print(b)
-    obj = Checkout(1,1,1,1610, 1610, model)
+    obj = Checkout(2,2,2,800, 800, model)
     a = obj.register_checkout(count_pk)
     print(a)

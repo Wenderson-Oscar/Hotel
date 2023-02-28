@@ -21,7 +21,8 @@ class ReserveClient:
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO reserva (quant_hospedes, antecipacao, entrada_prevista, saida_prevista,
-        data_criacao, pk_hospede, pk_quarto, pk_quarto_categoria) VALUES (?,?,?,?,?,?,?,?)""", 
+        data_criacao, pk_hospede, pk_quarto, pk_quarto_categoria) VALUES (:quant_hospedes,:antecipacao,
+        :entrada_prevista,:saida_prevista,:data_criacao,:pk_hospede,:pk_quarto,:pk_quarto_categoria)""", 
         (self.quant_hospedes, self.antecipacao, self.entrada_prevista, self.saida_prevista, datetime.today(),
         count_client_pk, self.number_room, self.type_category))
         conn.commit()
@@ -34,6 +35,6 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = ReserveClient(1,1,2,'2023-02-30', '2023-03-02', model)
+    obj = ReserveClient(2,2,1,'2023-02-30', '2023-03-09', model)
     a = obj.register_reserve(count_pk)
     print(a)

@@ -17,7 +17,8 @@ class Checkin:
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO checkin (data_criacao, pk_funcionario, pk_reserva, pk_reserva_hospede,
-        pk_reserva_quarto, pk_reserva_categoria) VALUES (?,?,?,?,?,?)""", (datetime.today(), 
+        pk_reserva_quarto, pk_reserva_categoria) VALUES (:data_criacao,:pk_funcionario,:pk_reserva,
+        :pk_reserva_hospede,:pk_reserva_quarto,:pk_reserva_categoria)""", (datetime.today(), 
         self.number_employee, count_reserve_pk, count_client_pk, self.number_room, self.type_category))
         conn.commit()
         conn.close()
@@ -29,6 +30,6 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = Checkin(1,1,1,model)
+    obj = Checkin(2,2,2,model)
     a = obj.register_checkin(count_pk)
     print(a)

@@ -12,7 +12,7 @@ class RoomCategory:
         """inserir dados do checkin"""
         conn = self.model.database.connect()
         cursor = conn.cursor()
-        cursor.execute("""INSERT INTO categoria (descricao, valor) VALUES (?,?)""", (self.descricao, self.valor))
+        cursor.execute("""INSERT INTO categoria (descricao, valor) VALUES (:descricao,:valor)""", (self.descricao, self.valor))
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
