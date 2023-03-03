@@ -24,7 +24,7 @@ class HotelSystem:
             event, values = self.window.read()
             if event == sg.WINDOW_CLOSED or event == 'Sair':
                 break
-            if values['usuario'] == 'admin' and values['senha'] == 'admin':
+            elif values['usuario'] == 'admin' and values['senha'] == 'admin':
                 interface_admin = ApplicationAdmin()
                 self.window.close()
                 interface_admin.select_menu_admin()
@@ -33,7 +33,7 @@ class HotelSystem:
                 self.window.close()
                 app.select_menu_clerk()
             else:
-                sg.popup('Usuário ou senha inválidos!')
+                sg.popup_auto_close('Usuário ou senha inválidos!')
 
         self.window.close()
 

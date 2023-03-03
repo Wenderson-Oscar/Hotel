@@ -38,16 +38,16 @@ class ApplicationAdmin:
                 self.window.close()
             # Criações
             if event == 'register category':
-                sg.popup('Layout temporario onde sera possível registra categoria')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível registra categoria')
                 self.result('Cadastrar Categoria')
             if event == 'register_room':
-                sg.popup('Layout temporario onde sera possível registra quarto')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível registra')
                 self.result('Cadastrar Quarto')
             if event == 'register_employee':
-                sg.popup('Layout temporario onde sera possível registra funcionario')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível registra')
                 self.result('Cadastrar Funcionario')
             if event == 'register_service':
-                sg.popup('Layout temporario onde sera possível registra serviço')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível registra')
                 self.result('Cadastrar Serviços')
             # Mudar de Janela
             if event == 'Consultas':

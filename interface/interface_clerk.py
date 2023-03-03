@@ -56,10 +56,10 @@ class ApplicationClerk:
             if event == 'listar_all':
                 self.result('Listar Todos os Clientes do sistema de Hotel!')
             if event == 'une_client':
-                sg.popup('Layout temporario onde sera possível inserir dados do cliente')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível inserir dados do cliente')
                 self.result('Consulta um Cliente')
             if event == 'client_room':
-                sg.popup('Layout temporario onde sera possível inserir dados do cliente por quarto')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível inserir dados do cliente por quarto')
                 self.result('Consultar Cliente por Quarto')
             if event == 'list_client_checkout':
                 self.result('Listar Hóspede que já pagaram')
@@ -70,7 +70,7 @@ class ApplicationClerk:
             if event == 'list room category':
                 self.result('Listar Categorias de Quartos')
             if event == 'guest_who_has_reservation':
-                sg.popup('Layout temporario onde sera possível inserir dados do cliente por reserva')
+                sg.popup('Layout Temporario','Layout temporario onde sera possível inserir dados do cliente por reserva')
                 self.result('Consultar Hóspede que tenha Reserva')
 
         self.window.close()
