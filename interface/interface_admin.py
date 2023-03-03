@@ -5,20 +5,26 @@ from interface_clerk import ApplicationClerk
 class ApplicationAdmin:
 
     def __init__(self) -> None:
-        menu_def = [['&Ajuda', ['&Tutorial', '&Sobre']]]
+        menu_def = [['&Ajuda', ['&Sobre']], ['&Configuração', ['&Sair']]
+        ]
         self.layout = [
             [sg.Menu(menu_def)],
             [sg.Text('Hotel borde', justification='center')],
-            [sg.Button('Cadastrar Funcionario')],
-            [sg.Button('Cadastrar Categoria')],
-            [sg.Button('Cadastrar Quarto')],
-            [sg.Button('Cadastrar Serviços')],
-            [sg.Button('Consultas')]
+            [sg.Button('Cadastrar Funcionario', key='register_employee'),
+            sg.Button('Cadastrar Categoria', key='register category'),
+            sg.Button('Cadastrar Quarto', key='register_room'),
+            sg.Button('Cadastrar Serviços', key='register_service'),
+            sg.Button('Consultas')],
+            [sg.Column([[sg.Text('Área de Exibição')],[sg.Output(size=(150, 100), key='exibir')],], 
+            vertical_alignment='center', justification='center')]
         ]
 
         self.window = sg.Window('Sistema de hotel', self.layout, element_justification='center',
-        resizable=True, size=(600, 600))
+        resizable=True, size=(1060, 640))
 
+
+    def result(self, result):
+        self.window['exibir'].update(f'{result}')
 
     def select_menu_admin(self):
         while True:
@@ -28,25 +34,17 @@ class ApplicationAdmin:
             # Menu
             elif event == 'Sobre':
                 sg.popup('Sobre', 'Desenvolvido por: Wenderson Oscar Santos Silva')
-            elif event == 'Tutorial':
-                sg.popup('Tutorial')
-            elif event == 'Cadastrar Hóspede':
-                sg.popup('Cadastro de hospede')
-            elif event == 'Serviço':
-                sg.popup('serviço')
-            elif event == 'Checkout':
-                sg.popup('checkout')
-            elif event == 'Cancelar Reserva':
-                sg.popup('Cancelar reserva')
+            elif event == 'Sair':
+                self.window.close()
             # Criações
-            if event == 'Cadastrar Categoria':
-                sg.popup('Cadastrar Categoria')
-            if event == 'Cadastrar Quarto':
-                sg.popup('Cadastrar Quarto')
-            if event == 'Cadastrar Funcionario':
-                sg.popup('Cadastrar Funcionario')
-            if event == 'Cadastrar Serviços':
-                sg.popup('Cadastrar Serviços')
+            if event == 'register category':
+                self.result('Cadastrar Categoria')
+            if event == 'register_room':
+                self.result('Cadastrar Quarto')
+            if event == 'register_employee':
+                self.result('Cadastrar Funcionario')
+            if event == 'register_service':
+                self.result('Cadastrar Serviços')
             # Mudar de Janela
             if event == 'Consultas':
                 consult = ApplicationClerk()

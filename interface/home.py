@@ -16,7 +16,7 @@ class HotelSystem:
             ]
 
         self.window = sg.Window('Sistema de hotel', self.layout_main, element_justification='center',
-        resizable=True, size=(600, 600))
+        resizable=True, size=(1060, 640))
 
 
     def run(self):
