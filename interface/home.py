@@ -7,16 +7,16 @@ class HotelSystem:
 
     def __init__(self):
         self.layout_main = [
-            [sg.Text('Hotel borde', justification='center')],
-            [sg.Text('Sistema de Login', font=('Helvetica', 20), justification='center')],
-            [sg.Text('Usuário:'), sg.Input(key='usuario')],
-            [sg.Text('Senha:'), sg.Input(key='senha', password_char='*')],
-            [sg.Button('Entrar', size=(10, 1), button_color=('white', '#4B8BBE')),
-            sg.Button('Sair', size=(10, 1), button_color=('white', '#B02B2C'))]
+            [[sg.T()] for i in range(6)],
+            [sg.T(size=(7,1)),sg.Text('Sistema de Login', font=('Helvetica', 20), justification='center')],
+            [sg.Text('Usuário:', size=(8,1)), sg.Input(key='usuario', size=(30,1))],
+            [sg.Text('Senha:', size=(8,1)), sg.Input(key='senha', password_char='*', size=(30,1))],
+            [sg.T(size=(7,1)),sg.Button('Entrar', size=(10,1), button_color=('white', '#4B8BBE')),
+            sg.Button('Sair', size=(10,1), button_color=('white', '#B02B2C'))]
             ]
 
         self.window = sg.Window('Sistema de hotel', self.layout_main, element_justification='center',
-        resizable=True, size=(1060, 640))
+        resizable=True, size=(1060, 540))
 
 
     def run(self):
@@ -27,11 +27,11 @@ class HotelSystem:
             elif values['usuario'] == 'admin' and values['senha'] == 'admin':
                 interface_admin = ApplicationAdmin()
                 self.window.close()
-                interface_admin.select_menu_admin()
+                interface_admin.run()
             elif values['usuario'] == 'clerk' and values['senha'] == '123':
                 app = ApplicationClerk()
                 self.window.close()
-                app.select_menu_clerk()
+                app.run()
             else:
                 sg.popup_auto_close('Usuário ou senha inválidos!')
 
