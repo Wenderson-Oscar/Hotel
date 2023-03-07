@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from clerk import AttendantQuery
 
 
 class LayoutQueryCpf:
@@ -19,9 +21,13 @@ class LayoutQueryCpf:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'PESQUISAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica da consulta')
+                consult_cpf = AttendantQuery('username','password', model)
+                return consult_cpf._search_guest(values['cpf'])
         self.window.close()
 
 
@@ -43,9 +49,13 @@ class LayoutQueryRoom:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'PESQUISAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica da consulta')
+                consult_room = AttendantQuery('username', 'password', model)
+                return consult_room._search_customer_by_room_number(values['n_quarto'])
         self.window.close()
 
 
@@ -67,9 +77,13 @@ class LayoutQueryPaid:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'PESQUISAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica da consulta')
+                consult_checkout = AttendantQuery('username','password', model)
+                self.consu_paid = consult_checkout._check_the_customer_total_payable(values['cpf'])
         self.window.close()
 
 
@@ -92,9 +106,13 @@ class LayoutQueryCheckin:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'PESQUISAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica da consulta')
+                query = AttendantQuery('username','password',model)
+                return query._search_person_by_checkin(values['nome'])
         self.window.close()
 
 

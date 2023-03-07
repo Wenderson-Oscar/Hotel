@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from room import Room
 
 
 class RegisterRoom:
@@ -25,8 +27,14 @@ class RegisterRoom:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 # Validações
                 # Lógica
+                register = Room(values['numero_categoria'],values['descricao'],values['numero_quarto'],
+                values['capacidade'], values['observacao'], 'Disponível' if values['status_d'] else 'Indosponível', model)
+                register.register_room()
                 sg.popup('Quarto registrado com sucesso!')
         self.window.close()
 

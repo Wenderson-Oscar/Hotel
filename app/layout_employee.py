@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from employee import Employee
+from model import FileAuthentication, Model, Databases
 
 
 class RegisterEmployee:
@@ -32,7 +34,15 @@ class RegisterEmployee:
             elif event == 'REGISTRAR':
                 #Validações
                 #Logica
-                sg.popup('logica do registro')
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
+                register = Employee(values['nome'], values['cpf'], values['telefone'], values['email'], 
+                'M' if values['sexo_m'] else 'F',
+                values['data_nascimento'], values['dados_bancarios'], values['cargo'], values['matricula'],model,
+                values['nivel_acesso'], values['senha_acesso'])
+                register.employee_registration()
+                sg.popup('Registrado com Sucesso')
         self.window.close()
 
 

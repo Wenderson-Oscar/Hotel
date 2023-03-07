@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from cancel_hosting import CancelHosting
 
 
 class LayoutCancel:
@@ -20,9 +22,14 @@ class LayoutCancel:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica do registro')
+                register = CancelHosting(values['nome'], values['cpf'], model)
+                register.cancel_client()
+                sg.popup('Hóspede Excluido!')
         self.window.close()
 
 

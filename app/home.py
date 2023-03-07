@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 from interface_clerk import ApplicationClerk
 from interface_admin import ApplicationAdmin
-from ..app.model import Model, FileAuthentication, Databases
+from model import Model, FileAuthentication, Databases
 
 
 class HotelSystem:
@@ -28,14 +28,15 @@ class HotelSystem:
             event, values = self.window.read()
             if event == sg.WINDOW_CLOSED or event == 'Sair':
                 break
-            elif model.login(values['usuario'], values['senha']) == True:
-                interface_admin = ApplicationAdmin()
-                self.window.close()
-                interface_admin.run()
-            elif values['usuario'] == 'clerk' and values['senha'] == '123':
-                app = ApplicationClerk()
-                self.window.close()
-                app.run()
+            elif authen.authenticate(values['usuario'], values['senha']):
+                if values['usuario'] == 'admin':
+                    interface_admin = ApplicationAdmin()
+                    self.window.close()
+                    interface_admin.run()  
+                elif values['usuario'] == 'clerk':
+                    app = ApplicationClerk()
+                    self.window.close()
+                    app.run() 
             else:
                 sg.popup_auto_close('Usuário ou senha inválidos!')
 

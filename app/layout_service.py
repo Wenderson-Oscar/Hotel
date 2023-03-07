@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from service import Service
 
 
 class RegisterService:
@@ -23,8 +25,14 @@ class RegisterService:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 # Validações
                 # Lógica
+                register = Service(values['descricao'], values['preco'], 'Disponível' if values['status_d'] else 
+                'Indisponível', values['number_funcionario'], model)
+                register.register_service()
                 sg.popup('Serviço registrada com sucesso!')
         self.window.close()
 

@@ -17,7 +17,7 @@ class AttendantQuery:
     cursor = conn.cursor()
     cursor.execute("""
     SELECT 
-    hospede.nome, hospede.cpf, hospede.data_criacao
+    *
     FROM hospede 
     INNER JOIN reserva ON hospede.id_hospede = reserva.pk_hospede""")
     rows = cursor.fetchall()
@@ -89,7 +89,7 @@ class AttendantQuery:
     categoria.valor 
     FROM quarto
     INNER JOIN categoria ON categoria.id_categoria = quarto.pk_categoria
-    WHERE quarto.status = 'disponivel'""")
+    WHERE quarto.status = 'Disponível'""")
     rows = cursor.fetchall()
     result = []
     for row in rows:
@@ -149,6 +149,6 @@ if __name__ == "__main__":
   db = Databases()
   model = Model(file, db)
   obj = AttendantQuery('clerk', '123', model)
-  a = obj._list_room_categories()
+  a = obj._search_for_available_rooms()
   print(a)
   

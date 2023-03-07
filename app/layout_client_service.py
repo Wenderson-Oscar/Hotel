@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import FileAuthentication, Model, Databases
+from service import BookRoomService
 
 
 class LayoutService:
@@ -20,9 +22,14 @@ class LayoutService:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica do registro')
+                register = BookRoomService(values['n_categoria'], values['n_servico'], model)
+                register.book_order()
+                sg.popup('Pedido Realizado')
         self.window.close()
 
 

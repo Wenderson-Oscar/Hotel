@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from register import ReserveClient
 
 
 class RegisterClient:
@@ -26,9 +28,16 @@ class RegisterClient:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica do registro')
+                register = ReserveClient(values['nome'], values['cpf'], values['telefone'], values['email'],
+                'M' if values['sexo_m'] else 'F', values['data_nascimento'], values['dados_bancarios'], values['senha_bancaria'],
+                model)
+                register.guest_registration()
+                sg.popup('Hóspede Cadastrado com Sucesso')
         self.window.close()
 
 

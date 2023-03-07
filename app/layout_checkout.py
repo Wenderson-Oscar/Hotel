@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from checkout import Checkout
 
 
 class LayoutCheckout:
@@ -11,6 +13,8 @@ class LayoutCheckout:
             [sg.Text('Funcionario Responsavel:', size=(23, 1)), sg.InputText(key='funcionario', size=(50,1))],
             [sg.Text('N° Categoria:', size=(23, 1)), sg.InputText(key='n_categoria', size=(50,1))],
             [sg.Text('N° Quarto:', size=(23, 1)), sg.InputText(key='n_quarto', size=(50,1))],
+            [sg.Text('N° Reserva:', size=(23, 1)), sg.InputText(key='n_reserve', size=(50,1))],
+            [sg.Text('N° Hóspede:', size=(23, 1)), sg.InputText(key='n_client', size=(50,1))],
             [sg.T()],
             [sg.T(size=(23,1)), sg.Button('REGISTRAR', bind_return_key=True), sg.T(size=(2,1)), sg.Button('CANCELAR')]
         ]
@@ -23,9 +27,15 @@ class LayoutCheckout:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 #Validações
                 #Logica
-                sg.popup('logica do registro')
+                register = Checkout(values['funcionario'], values['n_quarto'] ,values['n_categoria'], values['consumo_valor'], 
+                values['valor_pago'],values['n_reserve'], values['n_client'], model)
+                register.register_checkout()
+                sg.popup('Checkout Realizado')
         self.window.close()
 
 

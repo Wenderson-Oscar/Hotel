@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 from interface_clerk import ApplicationClerk
-from layout.admin.layout_employee import RegisterEmployee
-from layout.admin.layout_category import RegisterCategory
-from layout.admin.layout_room import RegisterRoom
-from layout.admin.layout_service import RegisterService
+from layout_employee import RegisterEmployee
+from layout_category import RegisterCategory
+from layout_room import RegisterRoom
+from layout_service import RegisterService
 
 
 class ApplicationAdmin:
@@ -46,19 +46,15 @@ class ApplicationAdmin:
             if event == 'register_category':
                 layout_category = RegisterCategory()
                 layout_category.run()
-                self.result('Cadastrado com Sucesso!')
             if event == 'register_room':
                 layout_room = RegisterRoom()
                 layout_room.run()
-                self.result('Cadastado com Sucesso!')
             if event == 'register_employee':
                 layout_employee = RegisterEmployee()
                 layout_employee.run()
-                self.result('Cadastrado Com Sucesso!')
             if event == 'register_service':
                 layout_service = RegisterService()
                 layout_service.run()
-                self.result('Cadastrado com Sucesso!')
             # Mudar de Janela
             if event == 'Consultas':
                 consult = ApplicationClerk()

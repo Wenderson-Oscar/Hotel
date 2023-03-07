@@ -24,6 +24,7 @@ class FileAuthentication(AuthenticationInterface):
     def __init__(self, file_path: str):
         self.file_path = file_path
 
+
     def authenticate(self, username: str = None, password: str = None) -> bool:
         """ler arquivo de autenticação e comparar o valores"""
         with open(self.file_path) as f:

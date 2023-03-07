@@ -3,7 +3,7 @@ from datetime import datetime
 from automate_insertion_pk import AutoIncrementPk
 
 
-class ReserveClient:
+class Reserve:
 
     def __init__(self, type_category: int, number_room: int, quant_hospedes: int, entrada_prevista: str,
                  saida_prevista: str, model: Model, antecipacao: float = None) -> None:
@@ -36,6 +36,6 @@ if __name__ == "__main__":
     db = Databases()
     model = Model(file, db)
     count_pk = AutoIncrementPk(model)
-    obj = ReserveClient(2,2,1,'2023-02-30', '2023-03-09', model)
+    obj = Reserve(2,2,1,'2023-02-30', '2023-03-09', model)
     a = obj.register_reserve(count_pk)
     print(a)

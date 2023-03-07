@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+from model import Model, FileAuthentication, Databases
+from category import RoomCategory
 
 
 class RegisterCategory:
@@ -20,8 +22,13 @@ class RegisterCategory:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
+                file = FileAuthentication('authenticade.json')
+                db = Databases()
+                model = Model(file, db)
                 # Validações
                 # Lógica
+                register = RoomCategory(values['descricao'], values['valor'], model)
+                register.register_category()
                 sg.popup('Categoria registrada com sucesso!')
         self.window.close()
 
