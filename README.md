@@ -2,6 +2,8 @@
 
 ## 🛠️ Em Construção 🔒
 
+### Erro Conhecido
+- **Erro de importação de Modulo** Ocorre um erro ao fazer as importações por pasta no projeto, sendo assim, não é possivel organizar os arquivos.
 
 <img height="450px" width="520px" src="printscreen/base.png">
 <img height="450px" width="525px" src="printscreen/admin.png">
