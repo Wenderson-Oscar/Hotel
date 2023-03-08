@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from model import Model, FileAuthentication, Databases
 from clerk import AttendantQuery
+from layout_calculate_checkout import LayoutCalculate
 
 
 class LayoutQueryCpf:

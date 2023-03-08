@@ -64,5 +64,5 @@ class CalculateValueClient:
         if result is not None:
             return result[0]
         else:
-            return 'Não a dados para calcular!'
+            return 'Número da Reserva Inexistente!'
 

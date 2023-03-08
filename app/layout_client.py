@@ -1,6 +1,8 @@
 import PySimpleGUI as sg
 from model import Model, FileAuthentication, Databases
 from register import ReserveClient
+from layout_reserve import LayoutReserve
+from layout_checkin import LayoutCheckin
 
 
 class RegisterClient:
@@ -38,6 +40,10 @@ class RegisterClient:
                 model)
                 register.guest_registration()
                 sg.popup('Hóspede Cadastrado com Sucesso')
+                reserve = LayoutReserve()
+                reserve.run()
+                checkin = LayoutCheckin()
+                checkin.run()
         self.window.close()
 
 

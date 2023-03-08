@@ -9,7 +9,7 @@ class Room:
         self.descricao = descricao
         self.numero_quarto = numero_quarto
         self.capacidade = capacidade
-        self.obervacao = observacao
+        self.observacao = observacao
         self.status =  status
         self.model = model
 
@@ -20,16 +20,26 @@ class Room:
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO quarto (descricao, numero_quarto, capacidade, observacao, status, 
         pk_categoria) VALUES (:descricao,:numero_quarto,:capacidade,:observacao,:status,:pk_categoria)""", 
-        (self.descricao, self.numero_quarto, self.capacidade, self.obervacao, self.status, self.room_category))
+        (self.descricao, self.numero_quarto, self.capacidade, self.observacao, self.status, self.room_category))
+        conn.commit()
+        self.__update_room()
+        return 'Dados Inseridos'
+    
+    def __update_room(self):
+        """Troca o status do quarto"""
+        conn = self.model.database.connect()
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE quarto SET status = 'Indisponível'  WHERE numero_quarto = :numero_quarto""",
+        {'numero_quarto': self.numero_quarto})
         conn.commit()
         conn.close()
-        return 'Dados Inseridos'
+        return 'alteração feita'
 
 
 if __name__ == "__main__":
     file = FileAuthentication("authenticade.json")
     db = Databases()
     model = Model(file, db)
-    obj = Room(2,'Quarto Simples', 2, 1, 'Quarto Simples, básico', 'Reservado', model)
+    obj = Room(1,'Quarto Simples', 1, 1, 'Quarto Simples, básico', 'Reservado', model)
     a = obj.register_room()
     print(a)

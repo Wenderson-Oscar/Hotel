@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from model import Model, FileAuthentication, Databases
 from checkout import Checkout
+from layout_cancel import LayoutCancel
 
 
 class LayoutCheckout:
@@ -36,6 +37,8 @@ class LayoutCheckout:
                 values['valor_pago'],values['n_reserve'], values['n_client'], model)
                 register.register_checkout()
                 sg.popup('Checkout Realizado')
+                cancel = LayoutCancel()
+                cancel.run()
         self.window.close()
 
 

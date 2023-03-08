@@ -8,13 +8,16 @@ from layout_reserve import LayoutReserve
 from layout_checkin import LayoutCheckin
 from model import Model, FileAuthentication, Databases
 from clerk import AttendantQuery
+from layout_calculate_checkout import LayoutCalculate
+from layout_release_room import LayoutRelease
 
 
 class ApplicationClerk:
 
     def __init__(self) -> None:
         """interface do atendente"""
-        menu_def = [['&Menu', ['&Cadastrar Hóspede', '&Reservar Hóspede', '&checkin' ,'&Serviço', '&Checkout', '&Cancelar Reserva']],
+        menu_def = [['&Menu', ['&Cadastrar Hóspede', '&Reservar Hóspede', '&checkin' ,'&Serviço', 
+        '&Calcular Checkout','&Checkout', '&Cancelar Reserva', '&Liberar Quarto']],
         ['&Ajuda', ['&Sobre']],
         ['&Configuração',['&Sair']]]
         self.layout = [
@@ -44,7 +47,7 @@ class ApplicationClerk:
             event, values = self.window.read()
             if event == sg.WINDOW_CLOSED:
                 break
-            # Menu paara clerk
+            # Menu
             elif event == 'Cadastrar Hóspede':
                 layout_client = RegisterClient()
                 layout_client.run()
@@ -57,13 +60,18 @@ class ApplicationClerk:
             elif event == 'Serviço':
                 layout_client_service = LayoutService()
                 layout_client_service.run()
+            elif event == 'Calcular Checkout':
+                calculate = LayoutCalculate()
+                calculate.run()
             elif event == 'Checkout':
                 layout_checkout = LayoutCheckout()
                 layout_checkout.run()
             elif event == 'Cancelar Reserva':
                 layout_cancel = LayoutCancel()
                 layout_cancel.run()
-            # outros
+            elif event == 'Liberar Quarto':
+                relase = LayoutRelease()
+                relase.run()
             elif event == 'Sobre':
                 sg.popup('Sobre', 'Desenvolvido por: Wenderson Oscar Santos Silva')
             elif event == 'Sair':
@@ -82,11 +90,11 @@ class ApplicationClerk:
             if event == 'client_room':
                 layout_query2 = LayoutQueryRoom()
                 layout_query2.run()
-                self.result(layout_query2.run() if layout_query2.run() else 'Não existe cliene nesse quarto')
+                self.result(layout_query2.run() if layout_query2.run() else 'Não existe cliente nesse quarto')
             if event == 'client_checkout':
                 layout_query3 = LayoutQueryPaid()
                 layout_query3.run()
-                self.result(layout_query3.run() if layout_query3.run() else 'CPF Invalido ou cliente inexistente')
+                self.result(layout_query3.run() if layout_query3.run() else 'CPF Invalido ou Cliente ainda não pagou')
             if event == 'available_room':
                 file = FileAuthentication('authenticade.json')
                 db = Databases()
