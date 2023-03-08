@@ -10,6 +10,7 @@ class LayoutCancel:
         self.layout = [
             [sg.Text('Nome:', size=(12, 1)), sg.InputText(key='nome', size=(50,1))],
             [sg.Text('CPF:', size=(12, 1)), sg.InputText(key='cpf', size=(50,1))],
+            [sg.Text('N° Reserva:', size=(12, 1)), sg.InputText(key='n_reserva', size=(50,1))],
             [sg.T()],
             [sg.T(size=(23,1)), sg.Button('REGISTRAR', bind_return_key=True), sg.T(size=(2,1)), sg.Button('CANCELAR')]
         ]
@@ -27,7 +28,7 @@ class LayoutCancel:
                 model = Model(file, db)
                 #Validações
                 #Logica
-                register = CancelHosting(values['nome'], values['cpf'], model)
+                register = CancelHosting(values['nome'], values['cpf'],values['n_reserva'], model)
                 register.cancel_client()
                 sg.popup('Hóspede Excluido!')
         self.window.close()
