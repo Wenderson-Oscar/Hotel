@@ -33,7 +33,8 @@ O objetivo deste projeto é desenvolver um sistema básico para hotelaria que pe
 ## Tecnologias Utilizadas
 
 Python <br>
-PySimpleGUI
+PySimpleGUI <br>
+Sqlite3
 <br>
 
 ## Processo de Instalação
