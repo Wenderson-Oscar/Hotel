@@ -34,8 +34,8 @@ class Checkout:
 
 class CalculateValueClient:
 
-    def __init__(self, numero_reserva: int, model: Model):
-        self.numero_reserva = numero_reserva
+    def __init__(self, numero_hospede: int, model: Model):
+        self.numero_hospede = numero_hospede
         self.model = model
 
     
@@ -58,11 +58,19 @@ class CalculateValueClient:
         INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
         LEFT JOIN reservar_servico rs ON c.id_categoria = rs.pk_categoria
         LEFT JOIN servico serv ON serv.id_servico = rs.pk_servico
-        WHERE r.pk_hospede = :id_param """, (date.today(), self.numero_reserva))
+        WHERE r.pk_hospede = :id_param """, (date.today(), self.numero_hospede))
         result = cursor.fetchone()
         conn.close()
         if result is not None:
             return result[0]
         else:
-            return 'Número da Reserva Inexistente!'
+            return 'Número do Hóspede Inexistente!'
 
+
+if __name__ == "__main__":
+    file = FileAuthentication('authenticade.json')
+    db = Databases()
+    model = Model(file, db)
+    obj = CalculateValueClient(1,model)
+    a = obj.calculate_value_total()
+    print(a)

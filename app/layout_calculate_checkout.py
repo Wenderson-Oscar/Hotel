@@ -8,7 +8,7 @@ class LayoutCalculate:
     def __init__(self):
         """Interface para calcular o checkout"""
         self.layout = [
-            [sg.Text('N° Reserva:', size=(12, 1)), sg.InputText(key='n_reserva', size=(50,1))],
+            [sg.Text('N° Hóspede:', size=(12, 1)), sg.InputText(key='n_hospede', size=(50,1))],
             [sg.T()],
             [sg.T(size=(23,1)), sg.Button('CALCULAR', bind_return_key=True), sg.T(size=(2,1)), sg.Button('CANCELAR')]
         ]
@@ -26,7 +26,7 @@ class LayoutCalculate:
                 model = Model(file, db)
                 #Validações
                 #Logica
-                calculate = CalculateValueClient(values['n_reserva'], model)
+                calculate = CalculateValueClient(values['n_hospede'], model)
                 sg.popup('Valor Total',calculate.calculate_value_total())
         self.window.close()
 
