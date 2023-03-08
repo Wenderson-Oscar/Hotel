@@ -30,7 +30,8 @@ O objetivo deste projeto é desenvolver um sistema básico para hotelaria que pe
 
 ## Tecnologias Utilizadas
 
-<img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white"> 3.8.10
+Python <br>
+PySimpleGUI
 <br>
 
 ## Processo de Instalação
