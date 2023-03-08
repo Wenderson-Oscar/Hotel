@@ -34,12 +34,3 @@ class CancelHosting:
         conn.commit()
         conn.close()
         return 'Reserva Deletada!'
-    
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    obj = CancelHosting('evely','12312312311',1, model)
-    a = obj.cancel_client()
-    print(a)

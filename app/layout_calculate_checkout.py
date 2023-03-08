@@ -30,7 +30,3 @@ class LayoutCalculate:
                 sg.popup('Valor Total',calculate.calculate_value_total())
         self.window.close()
 
-
-if __name__ == "__main__":
-    a = LayoutCalculate()
-    a.run()

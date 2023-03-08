@@ -36,7 +36,3 @@ class RegisterService:
                 sg.popup('Serviço registrada com sucesso!')
         self.window.close()
 
-
-if __name__ == "__main__":
-    obj = RegisterService()
-    obj.run()

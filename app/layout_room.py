@@ -38,7 +38,3 @@ class RegisterRoom:
                 sg.popup('Quarto registrado com sucesso!')
         self.window.close()
 
-
-if __name__ == "__main__":
-    obj = RegisterRoom()
-    obj.run()

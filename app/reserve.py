@@ -30,12 +30,3 @@ class Reserve:
         conn.close()
         return 'Registrado com Sucesso'
     
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    count_pk = AutoIncrementPk(model)
-    obj = Reserve(2,2,1,'2023-02-30', '2023-03-09', model)
-    a = obj.register_reserve(count_pk)
-    print(a)

@@ -122,8 +122,3 @@ class ApplicationClerk:
                 self.result(query_checkin if query_checkin else 'Não existe Reserva ou nome Incorreto')
 
         self.window.close()
-
-
-if __name__ == "__main__":
-    o = ApplicationClerk()
-    o.run()

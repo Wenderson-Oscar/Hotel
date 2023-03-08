@@ -60,16 +60,3 @@ class AutoIncrementPk:
         result = cursor.fetchone()[0]
         #conn.close()
         return result
-
-
-if __name__ == "__main__":
-        file = FileAuthentication("authenticade.json")
-        db = Databases()
-        obj = AutoIncrementPk(Model(file, db))
-        a = obj.count_client()
-        b = obj.count_employee()
-        c = obj.count_category()
-        d = obj.count_service()
-        e = obj.count_room()
-        f = obj.count_reserve()
-        print(a, b, c, d, e, f)

@@ -32,8 +32,6 @@ class RegisterEmployee:
             if event == sg.WINDOW_CLOSED or event == 'CANCELAR':
                 break
             elif event == 'REGISTRAR':
-                #Validações
-                #Logica
                 file = FileAuthentication('authenticade.json')
                 db = Databases()
                 model = Model(file, db)
@@ -46,6 +44,3 @@ class RegisterEmployee:
         self.window.close()
 
 
-if __name__ == "__main__":
-    obj = RegisterEmployee()
-    obj.run()

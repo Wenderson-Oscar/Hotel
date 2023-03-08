@@ -142,13 +142,3 @@ class AttendantQuery:
     WHERE hospede.nome = '{nome}'""")
     for row in cursor.fetchall():
       return row
-
-
-if __name__ == "__main__":
-  file = FileAuthentication("authenticated.json")
-  db = Databases()
-  model = Model(file, db)
-  obj = AttendantQuery('clerk', '123', model)
-  a = obj._search_for_available_rooms()
-  print(a)
-  

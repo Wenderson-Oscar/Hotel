@@ -32,7 +32,3 @@ class LayoutService:
                 sg.popup('Pedido Realizado')
         self.window.close()
 
-
-if __name__ == "__main__":
-    obj = LayoutService()
-    obj.run()

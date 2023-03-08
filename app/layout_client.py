@@ -47,6 +47,3 @@ class RegisterClient:
         self.window.close()
 
 
-if __name__ == "__main__":
-    obj = RegisterClient()
-    obj.run()

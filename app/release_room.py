@@ -17,11 +17,3 @@ class ReleaseRoom:
         conn.close()
         return 'alteração feita'
     
-
-if __name__ == "__main__":
-    file = FileAuthentication('authenticade.json')
-    db = Databases()
-    model = Model(file, db)
-    obj = ReleaseRoom(1,model)
-    a = obj.update_release()
-    print(a)

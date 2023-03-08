@@ -18,11 +18,4 @@ class RoomCategory:
         conn.close()
         return 'Dados Inseridos'
 
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    obj = RoomCategory('Luxo', 800, Model(file, db))
-    a = obj.register_category()
-    print(a)
     

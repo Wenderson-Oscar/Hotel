@@ -30,7 +30,3 @@ class LayoutRelease:
                 sg.popup('Alterado',release.update_release())
         self.window.close()
 
-
-if __name__ == "__main__":
-    a = LayoutRelease()
-    a.run()

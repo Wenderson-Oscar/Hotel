@@ -117,6 +117,3 @@ class LayoutQueryCheckin:
         self.window.close()
 
 
-if __name__ == "__main__":
-    obj = LayoutQueryCheckin()
-    obj.run()

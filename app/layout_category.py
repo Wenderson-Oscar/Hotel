@@ -32,7 +32,3 @@ class RegisterCategory:
                 sg.popup('Categoria registrada com sucesso!')
         self.window.close()
 
-
-if __name__ == "__main__":
-    obj = RegisterCategory()
-    obj.run()

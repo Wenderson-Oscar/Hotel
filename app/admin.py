@@ -48,11 +48,3 @@ class AdminQuery(AttendantQuery):
 
   def get_delete(self, txt):
     return self.__delete(txt)
-
-
-if __name__ == "__main__":
-  file = FileAuthentication("authenticade.json")
-  bd = Databases()
-  teste = AdminQuery('Oscar','12332112332122','988888817','oscar@gmail.com','M','2002-02-02','0','Gerente','213',Model(file, bd),'1','admin')
-  a = teste.get_read("SELECT * FROM funcionario")
-  print(a)

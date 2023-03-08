@@ -66,11 +66,3 @@ class CalculateValueClient:
         else:
             return 'Número do Hóspede Inexistente!'
 
-
-if __name__ == "__main__":
-    file = FileAuthentication('authenticade.json')
-    db = Databases()
-    model = Model(file, db)
-    obj = CalculateValueClient(1,model)
-    a = obj.calculate_value_total()
-    print(a)

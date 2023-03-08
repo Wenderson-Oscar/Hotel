@@ -36,10 +36,3 @@ class Room:
         return 'alteração feita'
 
 
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    obj = Room(1,'Quarto Simples', 1, 1, 'Quarto Simples, básico', 'Reservado', model)
-    a = obj.register_room()
-    print(a)

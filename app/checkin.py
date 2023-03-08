@@ -26,12 +26,3 @@ class Checkin:
         conn.close()
         return 'Dados Inseridos'
     
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    count_pk = AutoIncrementPk(model)
-    obj = Checkin(2,2,2,model)
-    a = obj.register_checkin(count_pk)
-    print(a)

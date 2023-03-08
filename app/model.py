@@ -61,12 +61,3 @@ class Model:
             return self.database.connect
         else:
             return 'Acesso Negado'
-
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    a = file.authenticate()
-    a = Databases()
-    db = Model(file, a)
-    c = db.login('clerk','123')
-    print(c)

@@ -42,6 +42,3 @@ class LayoutCheckout:
         self.window.close()
 
 
-if __name__ == "__main__":
-    obj = LayoutCheckout()
-    obj.run()

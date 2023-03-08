@@ -38,8 +38,3 @@ class LayoutReserve:
                 register.register_reserve(automate_pk)
                 sg.popup('Reserva Feita')
         self.window.close()
-
-
-if __name__ == "__main__":
-    obj = LayoutReserve()
-    obj.run()

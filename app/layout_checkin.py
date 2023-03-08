@@ -36,6 +36,3 @@ class LayoutCheckin:
         self.window.close()
 
 
-if __name__ == "__main__":
-    obj = LayoutCheckin()
-    obj.run()

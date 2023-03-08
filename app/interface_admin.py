@@ -63,7 +63,3 @@ class ApplicationAdmin:
 
         self.window.close()
 
-
-if __name__ == "__main__":
-    o = ApplicationAdmin()
-    o.run()
