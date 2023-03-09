@@ -5,11 +5,11 @@
 ### Erro Conhecido
 - **Erro de importação de Modulo** Ocorre um erro ao fazer as importações por pasta no projeto, sendo assim, não é possivel organizar os arquivos.
 
-<img height="450px" width="520px" src="printscreen/base.png">
-<img height="450px" width="525px" src="printscreen/admin.png">
-<img height="450px" width="525px" src="printscreen/admin1.png">
-<img height="450px" width="525px" src="printscreen/clerk.png">
-<img height="450px" width="525px" src="printscreen/clerk1.png">
+<img  src="printscreen/base.png">
+<img  src="printscreen/admin.png">
+<img  src="printscreen/admin1.png">
+<img  src="printscreen/clerk.png">
+<img  src="printscreen/clerk1.png">
 
 > O intuito desse prójeto é praticar POO respeitando os princípios de SOLID.
 
