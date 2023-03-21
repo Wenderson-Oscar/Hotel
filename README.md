@@ -1,10 +1,5 @@
 # Hotel
 
-## 🛠️ Em Construção 🔒
-
-### Erro Conhecido
-- **Erro de importação de Modulo** Ocorre um erro ao fazer as importações por pasta no projeto, sendo assim, não é possivel organizar os arquivos.
-
 <img  src="printscreen/base.png">
 <img  src="printscreen/admin.png">
 <img  src="printscreen/admin1.png">
@@ -12,6 +7,9 @@
 <img  src="printscreen/clerk1.png">
 
 > O intuito desse prójeto é praticar POO respeitando os princípios de SOLID.
+
+### Erro Conhecido
+- **Erro de importação de Modulo** Ocorre um erro ao fazer as importações por pasta no projeto, sendo assim, não é possivel organizar os arquivos.
 
 # Requisitos de Projeto para Sistema de Hotelaria
 
