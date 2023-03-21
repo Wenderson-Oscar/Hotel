@@ -1,6 +1,7 @@
 import sqlite3
 
-class Banco:
+
+class DataBase:
 
   def __init__(self) -> None:
     self.connect = sqlite3.connect("sqlite3.db")
@@ -9,6 +10,7 @@ class Banco:
 
 
   def __create_tables(self) -> str:
+    """criação do banco de dados"""
     self.cursor.execute("""CREATE TABLE IF NOT EXISTS hospede 
     (
       id_hospede INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
@@ -52,7 +54,7 @@ class Banco:
     self.cursor.execute(""" CREATE TABLE IF NOT EXISTS servico
     (
       id_servico INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      descricao VARHCAR(100),
+      descricao VARCHCAR(100),
       preco FLOAT,
       status VARCHAR(45),
       pk_funcionario INTEGER NOT NULL,
@@ -71,6 +73,7 @@ class Banco:
       CONSTRAINT pk_servico_pk_categoria_ids
       FOREIGN KEY (pk_servico)
       REFERENCES servico(id_servico)
+      ON DELETE CASCADE
       FOREIGN KEY (pk_categoria)
       REFERENCES categoria(id_categoria)
       ON DELETE CASCADE
@@ -96,7 +99,7 @@ class Banco:
       id_reserva INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       quant_hospedes INTEGER,
       antecipacao FLOAT,
-      entrava_prevista DATETIME,
+      entrada_prevista DATETIME,
       saida_prevista DATETIME,
       data_criacao DATETIME,
       pk_hospede INTEGER NOT NULL,
@@ -105,9 +108,11 @@ class Banco:
       CONSTRAINT pk_hospode_id_hospede
       FOREIGN KEY (pk_hospede)
       REFERENCES hospede (id_hospede)
+      ON DELETE CASCADE
       CONSTRAINT pk_quarto_id_quarto
       FOREIGN KEY (pk_quarto)
       REFERENCES quarto(id_quarto)
+      ON DELETE CASCADE
       CONSTRAINT pk_quarto_categoria_pk_categoria
       FOREIGN KEY (pk_quarto_categoria)
       REFERENCES quarto(pk_categoria)
@@ -123,9 +128,10 @@ class Banco:
       pk_reserva_hospede INTEGER NOT NULL,
       pk_reserva_quarto INTEGER NOT NULL,
       pk_reserva_categoria INTEGER NOT NULL,
-      CONSTRAINT pk_funcionario_id_funcionario_in
+      CONSTRAINT pk_funcionario_id_funcionario
       FOREIGN KEY(pk_funcionario)
       REFERENCES funcionario (id_funcionario)
+      ON DELETE CASCADE
       CONSTRAINT pk_reserva_reservahospede_reservaquarto_reservacategoria_in
       FOREIGN KEY (
         pk_reserva,
@@ -151,6 +157,7 @@ class Banco:
       CONSTRAINT pk_funcionario_id_funcionario_out
       FOREIGN KEY (pk_funcionario)
       REFERENCES funcionario (id_funcionario)
+      ON DELETE CASCADE
       CONSTRAINT pk_funcionario_reserva_reservahospede_reservaquarto_reservacategoria_out
       FOREIGN KEY (
         pk_reserva,
@@ -164,7 +171,3 @@ class Banco:
     """)
     self.connect.commit()
     self.cursor.close()
-
-
-if __name__ == "__main__":
-  obj = Banco()
