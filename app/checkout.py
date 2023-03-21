@@ -1,31 +1,32 @@
 from model import Model, FileAuthentication, Databases
-from automate_insertion_pk import AutoIncrementPk
 from datetime import datetime, date
+
 
 class Checkout:
 
     def __init__(self, number_employee: int, number_room: int, type_category: int,
-                  valor_consumo: float, valor_pago: float, model: Model) -> None:
+                  valor_consumo: float, valor_pago: float, numero_reserva: int,
+                   numero_client: int, model: Model) -> None:
         self.number_employee = number_employee
         self.number_room = number_room
         self.type_category = type_category
         self.valor_consumo = valor_consumo
         self.valor_pago = valor_pago
+        self.numero_reserva = numero_reserva
+        self.numero_client = numero_client
         self.model = model
 
 
-    def register_checkout(self, automate_pk: AutoIncrementPk):
+    def register_checkout(self):
         """Insere os dados no checkout"""
-        count_reserve_pk = automate_pk.count_reserve()
-        count_client_pk = automate_pk.count_client()
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO checkout (valor_consumo, valor_pago, data_criacao, pk_funcionario,
         pk_reserva, pk_reserva_hospede, pk_reserva_quarto, pk_reserva_categoria) VALUES (:valor_consumo,
         :valor_pago,:data_criacao,:pk_funcionario,:pk_reserva,:pk_reserva_hospede,:pk_reserva_quarto,
         :pk_reserva_categoria)""",
-        (self.valor_consumo, self.valor_pago, datetime.today(), self.number_employee, count_reserve_pk, 
-        count_client_pk, self.number_room, self.type_category))
+        (self.valor_consumo, self.valor_pago, datetime.today(), self.number_employee, self.numero_reserva, 
+        self.numero_client, self.number_room, self.type_category))
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
@@ -33,13 +34,13 @@ class Checkout:
 
 class CalculateValueClient:
 
-    def __init__(self, model: Model):
+    def __init__(self, numero_hospede: int, model: Model):
+        self.numero_hospede = numero_hospede
         self.model = model
 
     
-    def calculate_value_total(self, automate_pk: AutoIncrementPk):
+    def calculate_value_total(self):
         """faz o calculo de pagamento total considerando diaria, multa, serviço"""
-        count_reserva_pk = automate_pk.count_reserve()
         conn = self.model.database.connect()
         cursor = conn.cursor()
         cursor.execute("""
@@ -57,23 +58,11 @@ class CalculateValueClient:
         INNER JOIN categoria c ON c.id_categoria = q.pk_categoria
         LEFT JOIN reservar_servico rs ON c.id_categoria = rs.pk_categoria
         LEFT JOIN servico serv ON serv.id_servico = rs.pk_servico
-        WHERE r.pk_hospede = :id_param """, (date.today(), str(count_reserva_pk)))
+        WHERE r.pk_hospede = :id_param """, (date.today(), self.numero_hospede))
         result = cursor.fetchone()
         conn.close()
         if result is not None:
             return result[0]
         else:
-            return 'Não a dados para calcular!'
+            return 'Número do Hóspede Inexistente!'
 
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    count_pk = AutoIncrementPk(model)
-    obj1 = CalculateValueClient(model)
-    #b = obj1.calculate_value_total(count_pk)
-    #print(b)
-    obj = Checkout(2,2,2,800, 800, model)
-    a = obj.register_checkout(count_pk)
-    print(a)

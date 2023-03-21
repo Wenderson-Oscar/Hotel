@@ -32,9 +32,3 @@ class ReserveClient:
         conn.close()
         return 'reservado com sucesso'
 
-if __name__ == "__main__":
-    a = FileAuthentication("authenticade.json")
-    c = Databases()
-    cliente = ReserveClient('Joana Silva','99332126322','88109280','joana@gmail.com','F','2000-05-17','9','228',Model(a,c))
-    a = cliente.guest_registration()
-    print(a)

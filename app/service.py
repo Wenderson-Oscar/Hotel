@@ -1,6 +1,7 @@
 from model import Model, FileAuthentication, Databases
 from datetime import date
 
+
 class Service:
 
     def __init__(self, descricao: str, preco: float, status: str, responsible_official: int, model: Model):
@@ -40,15 +41,3 @@ class BookRoomService:
         conn.commit()
         conn.close()
         return 'Dados Inseridos'
-
-
-if __name__ == "__main__":
-    file = FileAuthentication("authenticade.json")
-    db = Databases()
-    model = Model(file, db)
-    #obj = Service('Cafe da manhã', 10, 'Ativo', 1,model)
-    #a = obj.register_service()
-    #print(a)
-    obj2 = BookRoomService(1,1,model)
-    c = obj2.book_order()
-    print(c)

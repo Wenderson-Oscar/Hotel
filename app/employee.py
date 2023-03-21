@@ -34,11 +34,3 @@ class Employee:
         conn.close()
         return 'Dados Inseridos'
 
-
-if __name__ == "__main__":
-    a = FileAuthentication("authenticade.json")
-    c = Databases()
-    cliente = Employee('Julia','33332122342','88810210','juliana@gmail.com','F','2003-01-20','5','Recpcionista',
-    '2', Model(a,c),'1','123')
-    a = cliente.employee_registration()
-    print(a)

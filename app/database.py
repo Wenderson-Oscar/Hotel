@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DataBase:
 
   def __init__(self) -> None:
@@ -72,6 +73,7 @@ class DataBase:
       CONSTRAINT pk_servico_pk_categoria_ids
       FOREIGN KEY (pk_servico)
       REFERENCES servico(id_servico)
+      ON DELETE CASCADE
       FOREIGN KEY (pk_categoria)
       REFERENCES categoria(id_categoria)
       ON DELETE CASCADE
@@ -106,9 +108,11 @@ class DataBase:
       CONSTRAINT pk_hospode_id_hospede
       FOREIGN KEY (pk_hospede)
       REFERENCES hospede (id_hospede)
+      ON DELETE CASCADE
       CONSTRAINT pk_quarto_id_quarto
       FOREIGN KEY (pk_quarto)
       REFERENCES quarto(id_quarto)
+      ON DELETE CASCADE
       CONSTRAINT pk_quarto_categoria_pk_categoria
       FOREIGN KEY (pk_quarto_categoria)
       REFERENCES quarto(pk_categoria)
@@ -127,6 +131,7 @@ class DataBase:
       CONSTRAINT pk_funcionario_id_funcionario
       FOREIGN KEY(pk_funcionario)
       REFERENCES funcionario (id_funcionario)
+      ON DELETE CASCADE
       CONSTRAINT pk_reserva_reservahospede_reservaquarto_reservacategoria_in
       FOREIGN KEY (
         pk_reserva,
@@ -152,6 +157,7 @@ class DataBase:
       CONSTRAINT pk_funcionario_id_funcionario_out
       FOREIGN KEY (pk_funcionario)
       REFERENCES funcionario (id_funcionario)
+      ON DELETE CASCADE
       CONSTRAINT pk_funcionario_reserva_reservahospede_reservaquarto_reservacategoria_out
       FOREIGN KEY (
         pk_reserva,
@@ -165,6 +171,3 @@ class DataBase:
     """)
     self.connect.commit()
     self.cursor.close()
-
-""" if __name__ == "__main__":
-  obj = DataBase() """
